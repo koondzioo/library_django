@@ -1,0 +1,12 @@
+[User]<->[Book_Order]
+[Book]<->[Book_Order]
+[Book]<-[Category]
+[Book]<->[Author]
+[≪User≫;User|id: long;name: string;surname: string;username: string;password: string; role: (admin/user); books_reseved: List_books; books_borrowed: List_books]
+[≪Book≫;Book|id: long;name: string;author: Author_id; rating: double; copies: int; category: category]
+[≪Book_Order≫;Book_Order|id: long; user_id: user_id; date_of_return: date]
+[≪Author≫;Author|id: long;name: string;surname: string;rating: double;books: list_books]
+[≪Enum≫;Category|Books Category]
+
+
+https://yuml.me/diagram/scruffy/class/draw
