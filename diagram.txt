@@ -1,12 +1,12 @@
-[User]<->[Book_Order]
+[User]<->[Book]
 [Book]<->[Book_Order]
 [Book]<-[Category]
 [Book]<->[Author]
+[Book]<->[Languages]
 [≪User≫;User|id: long;name: string;surname: string;username: string;password: string; role: (admin/user); books_reseved: List_books; books_borrowed: List_books]
-[≪Book≫;Book|id: long;name: string;author: Author_id; rating: double; copies: int; category: category]
-[≪Book_Order≫;Book_Order|id: long; user_id: user_id; date_of_return: date]
-[≪Author≫;Author|id: long;name: string;surname: string;rating: double;books: list_books]
+[≪Book≫;Book|id: long; isbn: string;name: string;author: Author_id; copies: int; category: category;languages: languages]
+[≪Book_Order≫;Book_Order|id: long; user_id: user_id;book_id: book_id; date_of_return: date; book_status: status]
+[≪Author≫;Author|id: long;name: string;surname: string;books: list_books; date_death: date]
 [≪Enum≫;Category|Books Category]
-
-
+[≪Enum≫;Languages|Books Languages]
 https://yuml.me/diagram/scruffy/class/draw
