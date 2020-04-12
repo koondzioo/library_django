@@ -1,4 +1,5 @@
 import uuid
+from datetime import date
 
 from django.contrib.auth.models import User
 from django.db import models
@@ -61,6 +62,10 @@ class Author(models.Model):
     surname = models.CharField(max_length=20, help_text='Author Surname')
     date_of_death = models.DateField(null=True, blank=True, verbose_name='Date Death')
 
+    def get_absolute_url(self):
+        """Function return absolute url"""
+        return reverse('book-detail', args=[str(self.id)])
+
     def __str__(self):
         """Function to print author"""
         return f'{self.name}, {self.surname}, {self.date_of_death}, {self.book_set}'
@@ -92,7 +97,14 @@ class BookOrder(models.Model):
     class Meta:
         """Meta class ordering by date return book"""
         ordering = ['date_of_return']
+        permissions = (("can_mark_returned", "Set book as returned"),)
 
     def __str__(self):
         """Function to display Book Order"""
         return f'{self.id} ({self.book.title})'
+
+    @property
+    def is_overdue(self):
+        if self.date_of_return and date.today() > self.date_of_return:
+            return True
+        return False

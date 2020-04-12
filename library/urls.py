@@ -20,9 +20,11 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import RedirectView
 
-#TODO URL vs PATH ???!!!
+# TODO URL vs PATH ???!!!
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    path('catalog/', include('catalog.urls')),
-    path('', RedirectView.as_view(url='catalog/', permanent=True))
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+                  url(r'^admin/', admin.site.urls),
+                  path('catalog/', include('catalog.urls')),
+                  path('accounts/', include('django.contrib.auth.urls')),
+                  path('accounts/', include('django_registration.backends.activation.urls')),
+                  path('', RedirectView.as_view(url='catalog/', permanent=True))
+              ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
