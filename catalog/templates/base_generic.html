@@ -41,6 +41,14 @@
                 <li>
                     <a href="{% url 'authors' %}"><span class="fa fa-user mr-3"></span>Authors</a>
                 </li>
+                {% if perms.catalog.can_mark_returned %}
+                    <hr>
+                    <li><strong>
+                        <center>Only for Employee</center>
+                    </strong></li>
+                    <li><a href="{% url 'all-borrowed-books' %}"><span class="fa fa-book mr-3"></span>Przedłuż wypożyczone książki</a></li>
+                    <hr>
+                {% endif %}
                 <hr>
             </ul>
         </nav>
