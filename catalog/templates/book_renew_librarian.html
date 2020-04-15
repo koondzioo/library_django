@@ -1,0 +1,15 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Przedłuż wypożyczenie: {{ book_order.book.title }}</h1>
+  <p>Wypożyczony przez: {{ book_order.user }}</p>
+  <p{% if book_order.is_overdue %} class="text-danger"{% endif %}>Wypożyczony do: {{ book_order.date_of_return }}</p>
+
+  <form action="" method="post">
+    {% csrf_token %}
+    <table>
+    {{ form.as_table }}
+    </table>
+    <input type="submit" value="Zatwierdź">
+  </form>
+{% endblock %}

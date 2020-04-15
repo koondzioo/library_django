@@ -8,7 +8,7 @@
             {% for bookorder in bookorder_list %}
                 <li class="{% if bookorder.is_overdue %}text-danger{% endif %}">
                     <a href="{% url 'book-detail' bookorder.book.pk %}">{{ bookorder.book.title }}
-                        </a> {{ bookorder.user.username }} ({{ bookorder.date_of_return }}) <a href="{% url 'renew-book-librarian' bookorder.pk %}">Przedłuż</a>
+                        </a> {{ bookorder.user.username }} ({{ bookorder.date_of_return }}) (<a href="{% url 'book-return' bookorder.id %}">Zatwierdź oddanie ksiązki</a>)
                 </li>
             {% endfor %}
         </ul>

@@ -30,7 +30,7 @@ class BookOrderAdmin(admin.ModelAdmin):
     list_filter = ('status', 'date_of_return')
 
     fieldsets = (
-        ("General information", {
+        (None, {
             'fields': ('book', 'imprint', 'id')
         }),
         ('Available', {

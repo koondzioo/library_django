@@ -36,8 +36,8 @@ class Language(models.Model):
 class Book(models.Model):
     """Book Model"""
     title = models.CharField(max_length=20, help_text='Book Title')
-    category = models.ManyToManyField(Category, help_text='Book Categories', verbose_name='Category')
-    language = models.ManyToManyField(Language, help_text='Book Language', verbose_name='Language')
+    category = models.ManyToManyField(Category, help_text='Book Categories', null=True, verbose_name='Category')
+    language = models.ManyToManyField(Language, help_text='Book Language', null=True, verbose_name='Language')
     author = models.ForeignKey('Author', on_delete=models.SET_NULL, null=True, help_text='Book Author')
     # copies = models.CharField(max_length=20, help_text='Book Copies')
     isbn = models.CharField(max_length=13, help_text='Book ISBN')

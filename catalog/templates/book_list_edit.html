@@ -1,0 +1,13 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Book List</h1>
+  <ul>
+    {% for book in book_list %}
+      <li>
+        {{ book.title }}  <a href="{% url 'book-update' book.pk %}">(Update)</a> <a href="{% url 'book-delete' book.pk %}">(Delete)</a>
+      </li>
+    {% endfor %}
+  </ul>
+
+{% endblock %}

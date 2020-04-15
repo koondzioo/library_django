@@ -46,8 +46,21 @@
                     <li><strong>
                         <center>Only for Employee</center>
                     </strong></li>
-                    <li><a href="{% url 'all-borrowed-books' %}"><span class="fa fa-book mr-3"></span>Przedłuż wypożyczone książki</a></li>
                     <hr>
+                    <li>
+                        <center>Books</center>
+                    </li>
+                    <li><a href="{% url 'all-borrowed-books' %}"><span class="fa fa-book mr-3"></span>Przedłuż
+                        wypożyczone książki</a></li>
+                    <li><a href="{% url 'book-create' %}"><span class="fa fa-book mr-3"></span>Create Book</a></li>
+                    <li><a href="{% url 'books-edit' %}"><span class="fa fa-book mr-3"></span>Edit Books</a></li>
+                    <li><a href="{% url 'borrowed-books-return' %}"><span class="fa fa-book mr-3"></span>Return Books</a></li>
+                    <hr>
+                    <li>
+                        <center>Authors</center>
+                    </li>
+                    <li><a href="{% url 'author-create' %}"><span class="fa fa-book mr-3"></span>Create Author</a></li>
+                    <li><a href="{% url 'authors-edit' %}"><span class="fa fa-book mr-3"></span>Edit Authors</a></li>
                 {% endif %}
                 <hr>
             </ul>
