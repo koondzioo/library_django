@@ -177,4 +177,4 @@ class AllBooksToReturnListView(LoginRequiredMixin, PermissionRequiredMixin, gene
     template_name = 'bookorder_list_borrowed_return.html'
 
     def get_queryset(self):
-        return BookOrder.objects.all().filter(status__exact='o').filter(date_of_return__lt=datetime.date.today())
+        return BookOrder.objects.all().filter(status__exact='o')

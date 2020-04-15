@@ -37,7 +37,7 @@ class Book(models.Model):
     """Book Model"""
     title = models.CharField(max_length=20, help_text='Book Title')
     category = models.ManyToManyField(Category, help_text='Book Categories', null=True, verbose_name='Category')
-    language = models.ManyToManyField(Language, help_text='Book Language', null=True, verbose_name='Language')
+    language = models.ForeignKey(Language, on_delete=models.SET_NULL, help_text='Book Language', null=True, verbose_name='Language')
     author = models.ForeignKey('Author', on_delete=models.SET_NULL, null=True, help_text='Book Author')
     # copies = models.CharField(max_length=20, help_text='Book Copies')
     isbn = models.CharField(max_length=13, help_text='Book ISBN')
@@ -60,21 +60,23 @@ class Author(models.Model):
     """Author Model"""
     name = models.CharField(max_length=20, help_text='Author Name')
     surname = models.CharField(max_length=20, help_text='Author Surname')
+    date_of_birth = models.DateField(null=True, blank=True, verbose_name='Date Birth')
     date_of_death = models.DateField(null=True, blank=True, verbose_name='Date Death')
 
     def get_absolute_url(self):
         """Function return absolute url"""
-        return reverse('book-detail', args=[str(self.id)])
+        return reverse('author-detail', args=[str(self.id)])
 
     def __str__(self):
         """Function to print author"""
-        return f'{self.name}, {self.surname}, {self.date_of_death}, {self.book_set}'
+        return f'{self.name} {self.surname}'
 
 
 class BookOrder(models.Model):
     """BookOrder Model"""
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='Unique ID')
-    book = models.ForeignKey('Book', on_delete=models.SET_NULL, null=True, verbose_name='Book title')
+    book = models.ForeignKey(Book, on_delete=models.SET_NULL, null=True, verbose_name='Book title')
+    #TODO user (?)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, max_length=20, help_text='User')
     date_of_return = models.DateField(null=True, blank=True, verbose_name='Date Return')
     imprint = models.CharField(max_length=200)

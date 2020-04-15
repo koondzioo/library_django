@@ -2,15 +2,11 @@
 
 {% block content %}
   <h1>Authors List</h1>
-  {% if book_list %}
   <ul>
     {% for author in author_list %}
       <li>
-        <a href="{{ author.get_absolute_url }}">{{ author.name }} {{ author.surname }}</a> ({{book.author}})
+        <a href="{{ author.get_absolute_url }}">{{ author.name }} {{ author.surname }}</a>
       </li>
     {% endfor %}
   </ul>
-  {% else %}
-    <p>Author doesn't have any books.</p>
-  {% endif %}
 {% endblock %}

@@ -27,8 +27,8 @@
             <ul class="list-unstyled components mb-5">
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'logout' %}?next={{ request.path }}">Logout</a></li>
-                    <li><a href>Hello {{ user.get_username }} </a></li>
-                    <li><a href="{% url 'my-borrowed' %}"><span class="fa fa-home mr-3"></span> Borrowed Books</a></li>
+                    <li> <center>Hello {{ user.get_username }} </center></li>
+                    <li><a href="{% url 'my-borrowed' %}"><span class="fa fa-book mr-3"></span>My Borrowed Books</a></li>
                 {% else %}
                     <li><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li>
                 {% endif %}
