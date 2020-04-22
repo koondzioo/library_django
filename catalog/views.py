@@ -10,7 +10,7 @@ from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.views.generic import CreateView, UpdateView, DeleteView
 
-from catalog.forms import RenewalBookForm, ChangeBookOrderStatusForm
+from catalog.forms import RenewalBookForm, ChangeBookOrderStatusForm, BookOrderForm
 from catalog.models import Book, BookOrder, Author, Category
 
 
@@ -178,3 +178,25 @@ class AllBooksToReturnListView(LoginRequiredMixin, PermissionRequiredMixin, gene
 
     def get_queryset(self):
         return BookOrder.objects.all().filter(status__exact='o')
+
+class BookInstanceBorrow(LoginRequiredMixin, UpdateView):
+    template_name = 'bookinstance_form.html'
+    model = BookOrder
+    form_class = BookOrderForm
+
+    def get_initial(self):
+        return {
+            "user": self.request.user,
+            "date_of_return": datetime.date.today() + datetime.timedelta(weeks=3)
+        }
+
+    def get_success_url(self):
+        return reverse_lazy('book-detail', kwargs={'pk': self.kwargs.get("book_pk")})
+
+    def form_valid(self, form):
+        response = form.save(commit=False)
+        if form.is_valid():
+            # process the data in form.cleaned_data as required (here we just write it to the model due_back field)
+            response.due_back = form.cleaned_data['due_back']
+            response.save()
+        return super(BookInstanceBorrow, self).form_valid(form)

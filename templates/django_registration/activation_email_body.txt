@@ -1,0 +1,2 @@
+Hello {{ user }}, to active account follow: {{ scheme }}://{{ site }}{% url 'django_registration_activate' activation_key %}
+

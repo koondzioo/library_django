@@ -27,10 +27,16 @@
             <ul class="list-unstyled components mb-5">
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'logout' %}?next={{ request.path }}">Logout</a></li>
-                    <li> <center>Hello {{ user.get_username }} </center></li>
-                    <li><a href="{% url 'my-borrowed' %}"><span class="fa fa-book mr-3"></span>My Borrowed Books</a></li>
+                    <li>
+                        <center>Hello {{ user.get_username }} </center>
+                    </li>
+                    <li><a href="{% url 'my-borrowed' %}"><span class="fa fa-book mr-3"></span>My Borrowed Books</a>
+                    </li>
                 {% else %}
                     <li><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li>
+                    <li>
+                        <a href="{% url 'django_registration_register' %}"><span class="fa fa-sign-in mr-3"></span>Register</a>
+                    </li>
                 {% endif %}
                 <li>
                     <a href="{% url 'index' %}"><span class="fa fa-home mr-3"></span> Main Page</a>
@@ -41,6 +47,7 @@
                 <li>
                     <a href="{% url 'authors' %}"><span class="fa fa-user mr-3"></span>Authors</a>
                 </li>
+
                 {% if perms.catalog.can_mark_returned %}
                     <hr>
                     <li><strong>
@@ -54,7 +61,8 @@
                         wypożyczone książki</a></li>
                     <li><a href="{% url 'book-create' %}"><span class="fa fa-book mr-3"></span>Create Book</a></li>
                     <li><a href="{% url 'books-edit' %}"><span class="fa fa-book mr-3"></span>Edit Books</a></li>
-                    <li><a href="{% url 'borrowed-books-return' %}"><span class="fa fa-book mr-3"></span>Return Books</a></li>
+                    <li><a href="{% url 'borrowed-books-return' %}"><span class="fa fa-book mr-3"></span>Return
+                        Books</a></li>
                     <hr>
                     <li>
                         <center>Authors</center>
