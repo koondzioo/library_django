@@ -56,6 +56,7 @@ class AuthorDetailView(generic.DetailView):
 class AuthorListView(generic.ListView):
     model = Author
     template_name = 'author_list.html'
+    paginate_by = 10
 
 
 class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
@@ -116,6 +117,13 @@ class BookDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     template_name = 'book_confirm_delete.html'
     model = Book
     success_url = reverse_lazy('books')
+
+class BookOrderDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+    permission_required = 'catalog.can_mark_returned'
+    template_name = 'bookorder_confirm_delete.html'
+    model = BookOrder
+    success_url = reverse_lazy('books')
+
 
 
 class AllBooksEditListView(LoginRequiredMixin, PermissionRequiredMixin, generic.ListView):

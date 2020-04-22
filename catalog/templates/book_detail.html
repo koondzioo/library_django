@@ -9,6 +9,10 @@
     <p><strong>Language:</strong> {{ book.language }}</p>
     <p><strong>Catgegory:</strong> {{ book.category.all|join:", " }}</p>
 
+    {% if perms.catalog.can_mark_returned %}
+        <a href="{% url 'book-update' book.pk %}">Update</a> <a href="{% url 'book-delete' book.pk %}">Delete</a>
+    {% endif %}
+
     <div style="margin-left:20px;margin-top:20px">
         <h4>Copies</h4>
 
@@ -24,12 +28,14 @@
             {% endif %}
             <p><strong>Imprint:</strong> {{ copy.imprint }}</p>
             <p class="text-muted"><strong>Id:</strong> {{ copy.id }}</p>
-            {% if copy.status == 'a' %}
-                <p>
-                    <a href="{% url 'bookinstance_borrow' pk=copy.id book_pk=book.pk book_title=book.title %}">Zarezerwuj</a>
-                    <a href="{% url 'bookinstance_borrow' pk=copy.id book_pk=book.pk book_title=book.title %}">Wypożycz</a>
-                </p>
-            {% endif %}
+{#            {% if copy.status == 'a' %}#}
+{#                <p>#}
+{#                    <a href="{% url 'bookinstance_borrow' pk=copy.id book_pk=book.pk book_title=book.title %}">Zarezerwuj</a>#}
+{#                    <a href="{% url 'bookinstance_borrow' pk=copy.id book_pk=book.pk book_title=book.title %}">Wypożycz</a>#}
+{#                </p>#}
+{#            {% endif %}#}
+            <a href="{% url 'book-return' copy.id %}">Return book</a>
+            <a href="{% url 'book-order-delete' copy.id %}">Delete Book</a>
         {% endfor %}
     </div>
 {% endblock %}
